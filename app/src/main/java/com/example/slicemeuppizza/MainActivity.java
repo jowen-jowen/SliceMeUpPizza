@@ -73,44 +73,75 @@ public class MainActivity extends AppCompatActivity {
             double pizzaPrice = 0;
             double toppingsPrice =0;
 
+            String selectedPizza ="";
+            String selectedCrust ="";
+
             if(ham.isChecked() ){
                 if(sm.isChecked()) {
                     pizzaPrice = HAM_SMALL;
+                    selectedPizza ="Small Ham & Cheese";
                 } else if (med.isChecked()) {
                     pizzaPrice = HAM_MEDIUM;
+                    selectedPizza ="Medium Ham & Cheese";
                 } else if (lar.isChecked()) {
                     pizzaPrice = HAM_LARGE;
+                    selectedPizza ="Large Ham & Cheese";
                 }
             } else if (italian.isChecked()) {
                 if(sm.isChecked()) {
                     pizzaPrice = ITALIAN_SMALL;
+                    selectedPizza ="Small Italian Pizza";
                 } else if (med.isChecked()) {
                     pizzaPrice = ITALIAN_MEDIUM;
+                    selectedPizza ="Medium Italian Pizza";
                 } else if (lar.isChecked()) {
                     pizzaPrice = ITALIAN_LARGE;
+                    selectedPizza ="large Italian Pizza";
                 }
             }
 
             double crustType = pizzaPrice;
             if(thick.isChecked()){
                 crustType = pizzaPrice * 1.5;
+                selectedCrust ="Thick";
+            } else{
+                selectedCrust ="Thin";
             }
 
-
-            if(onion.isChecked())
+            StringBuilder toppingsBuilder = new StringBuilder();
+            if(onion.isChecked()){
                 toppingsPrice +=ONION;
-            if (tom.isChecked())
+                toppingsBuilder.append("Onion\n");
+            }
+            if (tom.isChecked()){
                 toppingsPrice += TOMATO;
-            if(cheese.isChecked())
+                toppingsBuilder.append("Tomato\n");
+            }
+            if(cheese.isChecked()){
                 toppingsPrice += CHEESE;
-            if(mush.isChecked())
+                toppingsBuilder.append("Extra Cheese\n");
+            }
+            if(mush.isChecked()){
                 toppingsPrice += MUSHROOM;
-            if(pine.isChecked())
+                toppingsBuilder.append("Mushroom\n");
+            }
+            if(pine.isChecked()){
                 toppingsPrice += PINEAPPLE;
+                toppingsBuilder.append("Pineapple\n");
+            }
+
+            String selectedToppings = toppingsBuilder.toString();
 
             double totalPrice = crustType + toppingsPrice;
 
             Toast.makeText(MainActivity.this, "Total Price of the Pizza is: PHP " + totalPrice, Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(MainActivity.this, Reciept.class);
+            intent.putExtra("selectedPizza", selectedPizza);
+            intent.putExtra("selectedCrust", selectedCrust);
+            intent.putExtra("selectedToppings", selectedToppings);
+            intent.putExtra("totalPrice", totalPrice);
+            startActivity(intent);
 
         });
     }
