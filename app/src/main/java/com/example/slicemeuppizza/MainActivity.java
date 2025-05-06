@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
 
             Toast.makeText(MainActivity.this, "Total Price of the Pizza is: PHP " + totalPrice, Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(MainActivity.this, Reciept.class);
+            Intent intent = new Intent(MainActivity.this, Receipt.class);
             intent.putExtra("selectedPizza", selectedPizza);
             intent.putExtra("pizzaPrice", sendPizzaPrice);
             intent.putExtra("selectedCrust", selectedCrust);

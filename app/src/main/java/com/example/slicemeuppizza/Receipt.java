@@ -11,14 +11,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Reciept extends AppCompatActivity {
+public class Receipt extends AppCompatActivity {
     Button back;
     TextView pizza, crust, toppings, price, toppingsPrice, pizzaPrice;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_reciept);
+        setContentView(R.layout.activity_receipt);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -52,7 +52,7 @@ public class Reciept extends AppCompatActivity {
 
 
         back.setOnClickListener(v -> {
-            Intent intent = new Intent(Reciept.this, MainActivity.class);
+            Intent intent = new Intent(Receipt.this, MainActivity.class);
             startActivity(intent);
             finish();
         });
