@@ -1,6 +1,5 @@
 package com.example.slicemeuppizza;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -73,76 +72,44 @@ public class MainActivity extends AppCompatActivity {
             double pizzaPrice = 0;
             double toppingsPrice =0;
 
-            String selectedPizza ="";
-            String selectedCrust ="";
-
             if(ham.isChecked() ){
                 if(sm.isChecked()) {
                     pizzaPrice = HAM_SMALL;
-                    selectedPizza ="Small Ham & Cheese";
                 } else if (med.isChecked()) {
                     pizzaPrice = HAM_MEDIUM;
-                    selectedPizza ="Medium Ham & Cheese";
                 } else if (lar.isChecked()) {
                     pizzaPrice = HAM_LARGE;
-                    selectedPizza ="Large Ham & Cheese";
                 }
             } else if (italian.isChecked()) {
                 if(sm.isChecked()) {
                     pizzaPrice = ITALIAN_SMALL;
-                    selectedPizza ="Small Italian Pizza";
                 } else if (med.isChecked()) {
                     pizzaPrice = ITALIAN_MEDIUM;
-                    selectedPizza ="Medium Italian Pizza";
                 } else if (lar.isChecked()) {
                     pizzaPrice = ITALIAN_LARGE;
-                    selectedPizza ="large Italian Pizza";
                 }
             }
 
             double crustType = pizzaPrice;
             if(thick.isChecked()){
                 crustType = pizzaPrice * 1.5;
-                selectedCrust ="Thick";
-            } else{
-                selectedCrust ="Thin";
             }
 
-            StringBuilder toppingsBuilder = new StringBuilder();
-            if(onion.isChecked()){
+
+            if(onion.isChecked())
                 toppingsPrice +=ONION;
-                toppingsBuilder.append("Onion\n");
-            }
-            if (tom.isChecked()){
+            if (tom.isChecked())
                 toppingsPrice += TOMATO;
-                toppingsBuilder.append("Tomato\n");
-            }
-            if(cheese.isChecked()){
+            if(cheese.isChecked())
                 toppingsPrice += CHEESE;
-                toppingsBuilder.append("Extra Cheese\n");
-            }
-            if(mush.isChecked()){
+            if(mush.isChecked())
                 toppingsPrice += MUSHROOM;
-                toppingsBuilder.append("Mushroom\n");
-            }
-            if(pine.isChecked()){
+            if(pine.isChecked())
                 toppingsPrice += PINEAPPLE;
-                toppingsBuilder.append("Pineapple\n");
-            }
-
-            String selectedToppings = toppingsBuilder.toString();
 
             double totalPrice = crustType + toppingsPrice;
 
             Toast.makeText(MainActivity.this, "Total Price of the Pizza is: PHP " + totalPrice, Toast.LENGTH_SHORT).show();
-
-            Intent intent = new Intent(MainActivity.this, Reciept.class);
-            intent.putExtra("selectedPizza", selectedPizza);
-            intent.putExtra("selectedCrust", selectedCrust);
-            intent.putExtra("selectedToppings", selectedToppings);
-            intent.putExtra("totalPrice", totalPrice);
-            startActivity(intent);
-
         });
     }
 
