@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Reciept extends AppCompatActivity {
     Button back;
-    TextView pizza, crust, toppings, price;
+    TextView pizza, crust, toppings, price, toppingsPrice, pizzaPrice;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,20 +28,38 @@ public class Reciept extends AppCompatActivity {
         back = findViewById(R.id.btnMakePurchase);
 
         pizza = findViewById(R.id.pizza);
+        pizzaPrice = findViewById(R.id.pizzaPrice);
         crust = findViewById(R.id.pizzaCrust);
         toppings = findViewById(R.id.toppings);
-        price = findViewById(R.id.pizzaPrice);
+        toppingsPrice = findViewById(R.id.toppingsPrice);
+        price = findViewById(R.id.totalPrice);
 
         Intent fetch= getIntent();
         String receivedPizza = fetch.getStringExtra("selectedPizza");
+        String receivedPizzaPrice = fetch.getStringExtra("sendPizzaPrice");
         String receivedCrust = fetch.getStringExtra("selectedCrust");
         String receivedToppings = fetch.getStringExtra("selectedToppings");
+        String receivedToppingsPrice = fetch.getStringExtra("totalToppingsPrice");
         String receivedPrice = fetch.getStringExtra("totalPrice");
 
-        price.setText(receivedPizza);
-        crust.setText(receivedCrust);
-        toppings.setText(receivedToppings);
-        price.setText(receivedPrice);
+
+
+
+
+        pizza.setText("Pizza Type: " + receivedPizza);
+        pizzaPrice.setText("Pizza Price: " + receivedPizzaPrice);
+        crust.setText("Type of Crust: " + receivedCrust);
+        toppings.setText("Toppings:\n\n" + receivedToppings);
+        toppingsPrice.setText("Total Toppings Price: " + receivedToppingsPrice);
+        price.setText("Total Price: " + receivedPrice);
+
+
+
+        back.setOnClickListener(v -> {
+            Intent intent = new Intent(Reciept.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
 
 

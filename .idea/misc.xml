@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+=========
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="VisualizationToolProject">
@@ -11,11 +16,6 @@
         <option name="scale" value="0.7299270072992701" />
       </ProjectState>
     </option>
-=======
-    <output url="file://$PROJECT_DIR$/build/classes" />
-  </component>
-  <component name="ProjectType">
-    <option name="id" value="Android" />
->>>>>>> origin/JhoeWhen
+>>>>>>>>> Temporary merge branch 2
   </component>
 </project>
