@@ -36,20 +36,16 @@ public class Reciept extends AppCompatActivity {
 
         Intent fetch= getIntent();
         String receivedPizza = fetch.getStringExtra("selectedPizza");
-        String receivedPizzaPrice = fetch.getStringExtra("sendPizzaPrice");
+        String receivedPizzaPrice = fetch.getStringExtra("pizzaPrice");
         String receivedCrust = fetch.getStringExtra("selectedCrust");
         String receivedToppings = fetch.getStringExtra("selectedToppings");
-        String receivedToppingsPrice = fetch.getStringExtra("totalToppingsPrice");
+        String receivedToppingsPrice = fetch.getStringExtra("toppingsPrice");
         String receivedPrice = fetch.getStringExtra("totalPrice");
-
-
-
-
 
         pizza.setText("Pizza Type: " + receivedPizza);
         pizzaPrice.setText("Pizza Price: " + receivedPizzaPrice);
         crust.setText("Type of Crust: " + receivedCrust);
-        toppings.setText("Toppings:\n\n" + receivedToppings);
+        toppings.setText("Toppings:\n" + receivedToppings);
         toppingsPrice.setText("Total Toppings Price: " + receivedToppingsPrice);
         price.setText("Total Price: " + receivedPrice);
 

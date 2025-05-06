@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,7 +18,9 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
 
     RadioButton ham, italian, sm, med, lar, thick, thin;
-    Button process;
+
+    RadioGroup type, crust, size;
+    Button process, clear;
 
     CheckBox cheese,mush, onion, tom, pine;
 
@@ -32,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        //Radio Group
+        type = findViewById(R.id.rgType);
+        crust = findViewById(R.id.rgCrust);
+        size = findViewById(R.id.rgSize);
+
         //Radio Button
         ham = findViewById(R.id.rbHam);
         italian = findViewById(R.id.rbitalian);
@@ -43,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
         //Button
         process = findViewById(R.id.btnProcess);
+        clear = findViewById(R.id.btnNewOrder);
+
 
         //Check Box
         cheese = findViewById(R.id.cbExCheese);
@@ -52,6 +62,22 @@ public class MainActivity extends AppCompatActivity {
         pine = findViewById(R.id.cbPineapple);
 
         OrderProcessing();
+        ClearOrder();
+    }
+
+    private void ClearOrder() {
+        clear.setOnClickListener(v->{
+            type.clearCheck();
+            size.clearCheck();
+            crust.clearCheck();
+
+            cheese.setChecked(false);
+            mush.setChecked(false);
+            onion.setChecked(false);
+            tom.setChecked(false);
+            pine.setChecked(false);
+
+        });
     }
 
     private void OrderProcessing() {
@@ -133,20 +159,21 @@ public class MainActivity extends AppCompatActivity {
             String selectedToppings = toppingsBuilder.toString();
 
             double totalPrice = crustType + toppingsPrice;
+            String sendPizzaPrice = String.format(String.valueOf(pizzaPrice));
+            String sendToppingsPrice = String.format(String.valueOf(toppingsPrice));
+            String sendTotalPrice = String.format(String.valueOf(totalPrice));
 
-<<<<<<<<< Temporary merge branch 1
-            Toast.makeText(this, "Total Price of the Pizza is: PHP " + totalPrice, Toast.LENGTH_SHORT).show();
-=========
             Toast.makeText(MainActivity.this, "Total Price of the Pizza is: PHP " + totalPrice, Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(MainActivity.this, Reciept.class);
             intent.putExtra("selectedPizza", selectedPizza);
+            intent.putExtra("pizzaPrice", sendPizzaPrice);
             intent.putExtra("selectedCrust", selectedCrust);
             intent.putExtra("selectedToppings", selectedToppings);
-            intent.putExtra("totalPrice", totalPrice);
+            intent.putExtra("toppingsPrice", sendToppingsPrice);
+            intent.putExtra("totalPrice", sendTotalPrice);
             startActivity(intent);
 
->>>>>>>>> Temporary merge branch 2
         });
     }
 
