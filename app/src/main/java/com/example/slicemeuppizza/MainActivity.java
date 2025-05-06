@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
             double totalPrice = crustType + toppingsPrice;
 
-            Toast.makeText(MainActivity.this, "Total Price of the Pizza is: PHP " + totalPrice, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Total Price of the Pizza is: PHP " + totalPrice, Toast.LENGTH_SHORT).show();
         });
     }
 
