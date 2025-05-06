@@ -1,5 +1,6 @@
 package com.example.slicemeuppizza;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         lar = findViewById(R.id.rbLar);
         thick = findViewById(R.id.rbThick);
         thin = findViewById(R.id.rbThin);
+
+
 
         //Button
         process = findViewById(R.id.btnProcess);
