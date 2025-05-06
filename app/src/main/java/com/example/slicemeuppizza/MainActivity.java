@@ -1,5 +1,6 @@
 package com.example.slicemeuppizza;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -110,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
             double totalPrice = crustType + toppingsPrice;
 
             Toast.makeText(MainActivity.this, "Total Price of the Pizza is: PHP " + totalPrice, Toast.LENGTH_SHORT).show();
+
         });
     }
 
