@@ -1,0 +1,327 @@
+Index: app/src/main/java/com/example/slicemeuppizza/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.slicemeuppizza;\r\n\r\nimport android.os.Bundle;\r\nimport android.widget.Button;\r\nimport android.widget.CheckBox;\r\nimport android.widget.RadioButton;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.activity.EdgeToEdge;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.graphics.Insets;\r\nimport androidx.core.view.ViewCompat;\r\nimport androidx.core.view.WindowInsetsCompat;\r\n\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n\r\n    RadioButton ham, italian, sm, med, lar, thick, thin;\r\n    Button process;\r\n\r\n    CheckBox cheese,mush, onion, tom, pine;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        EdgeToEdge.enable(this);\r\n        setContentView(R.layout.activity_main);\r\n        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {\r\n            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());\r\n            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);\r\n            return insets;\r\n        });\r\n\r\n        //Radio Button\r\n        ham = findViewById(R.id.rbHam);\r\n        italian = findViewById(R.id.rbitalian);\r\n        sm = findViewById(R.id.rbSmall);\r\n        med = findViewById(R.id.rbMed);\r\n        lar = findViewById(R.id.rbLar);\r\n        thick = findViewById(R.id.rbThick);\r\n        thin = findViewById(R.id.rbThin);\r\n\r\n        //Button\r\n        process = findViewById(R.id.btnProcess);\r\n\r\n        //Check Box\r\n        cheese = findViewById(R.id.cbExCheese);\r\n        mush = findViewById(R.id.cbMushrooms);\r\n        onion = findViewById(R.id.cbOnion);\r\n        tom = findViewById(R.id.cbTomato);\r\n        pine = findViewById(R.id.cbPineapple);\r\n\r\n        OrderProcessing();\r\n    }\r\n\r\n    private void OrderProcessing() {\r\n        final double ITALIAN_SMALL = 100.00;\r\n        final double ITALIAN_MEDIUM = 150.00;\r\n        final double ITALIAN_LARGE = 200.00;\r\n\r\n        final double HAM_SMALL = 200.00;\r\n        final double HAM_MEDIUM = 300.00;\r\n        final double HAM_LARGE = 400.00;\r\n\r\n        final double TOMATO = 10.00;\r\n        final double ONION = 10.00;\r\n        final double PINEAPPLE = 15.00;\r\n        final double CHEESE = 20.00;\r\n        final double MUSHROOM = 20.00;\r\n\r\n        process.setOnClickListener(v -> {\r\n            double pizzaPrice = 0;\r\n            double toppingsPrice =0;\r\n\r\n            if(ham.isChecked() ){\r\n                if(sm.isChecked()) {\r\n                    pizzaPrice = HAM_SMALL;\r\n                } else if (med.isChecked()) {\r\n                    pizzaPrice = HAM_MEDIUM;\r\n                } else if (lar.isChecked()) {\r\n                    pizzaPrice = HAM_LARGE;\r\n                }\r\n            } else if (italian.isChecked()) {\r\n                if(sm.isChecked()) {\r\n                    pizzaPrice = ITALIAN_SMALL;\r\n                } else if (med.isChecked()) {\r\n                    pizzaPrice = ITALIAN_MEDIUM;\r\n                } else if (lar.isChecked()) {\r\n                    pizzaPrice = ITALIAN_LARGE;\r\n                }\r\n            }\r\n\r\n            double crustType = pizzaPrice;\r\n            if(thick.isChecked()){\r\n                crustType = pizzaPrice * 1.5;\r\n            }\r\n\r\n\r\n            if(onion.isChecked())\r\n                toppingsPrice +=ONION;\r\n            if (tom.isChecked())\r\n                toppingsPrice += TOMATO;\r\n            if(cheese.isChecked())\r\n                toppingsPrice += CHEESE;\r\n            if(mush.isChecked())\r\n                toppingsPrice += MUSHROOM;\r\n            if(pine.isChecked())\r\n                toppingsPrice += PINEAPPLE;\r\n\r\n            double totalPrice = crustType + toppingsPrice;\r\n\r\n            Toast.makeText(this, \"Total Price of the Pizza is: PHP \" + totalPrice, Toast.LENGTH_SHORT).show();\r\n        });\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/slicemeuppizza/MainActivity.java b/app/src/main/java/com/example/slicemeuppizza/MainActivity.java
+--- a/app/src/main/java/com/example/slicemeuppizza/MainActivity.java	(revision e07a1f670f2b183447d0804159411afc88e5f285)
++++ b/app/src/main/java/com/example/slicemeuppizza/MainActivity.java	(date 1746525885298)
+@@ -1,5 +1,6 @@
+ package com.example.slicemeuppizza;
+ 
++import android.content.Intent;
+ import android.os.Bundle;
+ import android.widget.Button;
+ import android.widget.CheckBox;
+@@ -72,44 +73,76 @@
+             double pizzaPrice = 0;
+             double toppingsPrice =0;
+ 
++            String selectedPizza ="";
++            String selectedCrust ="";
++
+             if(ham.isChecked() ){
+                 if(sm.isChecked()) {
+                     pizzaPrice = HAM_SMALL;
++                    selectedPizza ="Small Ham & Cheese";
+                 } else if (med.isChecked()) {
+                     pizzaPrice = HAM_MEDIUM;
++                    selectedPizza ="Medium Ham & Cheese";
+                 } else if (lar.isChecked()) {
+                     pizzaPrice = HAM_LARGE;
++                    selectedPizza ="Large Ham & Cheese";
+                 }
+             } else if (italian.isChecked()) {
+                 if(sm.isChecked()) {
+                     pizzaPrice = ITALIAN_SMALL;
++                    selectedPizza ="Small Italian Pizza";
+                 } else if (med.isChecked()) {
+                     pizzaPrice = ITALIAN_MEDIUM;
++                    selectedPizza ="Medium Italian Pizza";
+                 } else if (lar.isChecked()) {
+                     pizzaPrice = ITALIAN_LARGE;
++                    selectedPizza ="large Italian Pizza";
+                 }
+             }
+ 
+             double crustType = pizzaPrice;
+             if(thick.isChecked()){
+                 crustType = pizzaPrice * 1.5;
++                selectedCrust ="Thick";
++            } else{
++                selectedCrust ="Thin";
+             }
+ 
+-
+-            if(onion.isChecked())
++            StringBuilder toppingsBuilder = new StringBuilder();
++            if(onion.isChecked()){
+                 toppingsPrice +=ONION;
+-            if (tom.isChecked())
++                toppingsBuilder.append("Onion\n");
++            }
++            if (tom.isChecked()){
+                 toppingsPrice += TOMATO;
+-            if(cheese.isChecked())
++                toppingsBuilder.append("Tomato\n");
++            }
++            if(cheese.isChecked()){
+                 toppingsPrice += CHEESE;
+-            if(mush.isChecked())
++                toppingsBuilder.append("Extra Cheese\n");
++            }
++            if(mush.isChecked()){
+                 toppingsPrice += MUSHROOM;
+-            if(pine.isChecked())
++                toppingsBuilder.append("Mushroom\n");
++            }
++            if(pine.isChecked()){
+                 toppingsPrice += PINEAPPLE;
++                toppingsBuilder.append("Pineapple\n");
++            }
++
++            String selectedToppings = toppingsBuilder.toString();
+ 
+             double totalPrice = crustType + toppingsPrice;
+ 
+-            Toast.makeText(this, "Total Price of the Pizza is: PHP " + totalPrice, Toast.LENGTH_SHORT).show();
++            Toast.makeText(MainActivity.this, "Total Price of the Pizza is: PHP " + totalPrice, Toast.LENGTH_SHORT).show();
++
++            Intent intent = new Intent(MainActivity.this, Reciept.class);
++            intent.putExtra("selectedPizza", selectedPizza);
++            intent.putExtra("selectedCrust", selectedCrust);
++            intent.putExtra("selectedToppings", selectedToppings);
++            intent.putExtra("totalPrice", totalPrice);
++            startActivity(intent);
++
+         });
+     }
+ 
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.SliceMeUpPizza\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".FirstPage\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n\r\n        <meta-data\r\n            android:name=\"preloaded_fonts\"\r\n            android:resource=\"@array/preloaded_fonts\" />\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision e07a1f670f2b183447d0804159411afc88e5f285)
++++ b/app/src/main/AndroidManifest.xml	(date 1746525431844)
+@@ -13,6 +13,9 @@
+         android:theme="@style/Theme.SliceMeUpPizza"
+         tools:targetApi="31">
+         <activity
++            android:name=".Reciept"
++            android:exported="false" />
++        <activity
+             android:name=".MainActivity"
+             android:exported="false" />
+         <activity
+Index: .idea/deploymentTargetDropDown.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"deploymentTargetDropDown\">\r\n    <value>\r\n      <entry key=\"app\">\r\n        <State>\r\n          <targetSelectedWithDropDown>\r\n            <Target>\r\n              <type value=\"QUICK_BOOT_TARGET\" />\r\n              <deviceKey>\r\n                <Key>\r\n                  <type value=\"VIRTUAL_DEVICE_PATH\" />\r\n                  <value value=\"C:\\Users\\jhoew\\.android\\avd\\Pixel_3a_API_30.avd\" />\r\n                </Key>\r\n              </deviceKey>\r\n            </Target>\r\n          </targetSelectedWithDropDown>\r\n          <timeTargetWasSelectedWithDropDown value=\"2025-05-06T07:59:20.419847Z\" />\r\n        </State>\r\n      </entry>\r\n    </value>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+--- a/.idea/deploymentTargetDropDown.xml	(revision e07a1f670f2b183447d0804159411afc88e5f285)
++++ b/.idea/deploymentTargetDropDown.xml	(date 1746525750826)
+@@ -10,12 +10,12 @@
+               <deviceKey>
+                 <Key>
+                   <type value="VIRTUAL_DEVICE_PATH" />
+-                  <value value="C:\Users\jhoew\.android\avd\Pixel_3a_API_30.avd" />
++                  <value value="C:\Users\Cezar Dominic Teope\.android\avd\Pixel_6_API_30.avd" />
+                 </Key>
+               </deviceKey>
+             </Target>
+           </targetSelectedWithDropDown>
+-          <timeTargetWasSelectedWithDropDown value="2025-05-06T07:59:20.419847Z" />
++          <timeTargetWasSelectedWithDropDown value="2025-05-06T07:25:51.517054500Z" />
+         </State>
+       </entry>
+     </value>
+Index: app/src/main/res/layout/activity_reciept.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_reciept.xml b/app/src/main/res/layout/activity_reciept.xml
+new file mode 100644
+--- /dev/null	(date 1746525431846)
++++ b/app/src/main/res/layout/activity_reciept.xml	(date 1746525431846)
+@@ -0,0 +1,134 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:id="@+id/main"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context=".Reciept">
++
++    <TextView
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:textStyle="bold"
++        android:layout_marginTop="50sp"
++        android:text="RECEIPT"
++        android:gravity="center"
++        android:textSize="20sp"
++        app:layout_constraintRight_toRightOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintLeft_toLeftOf="parent"
++
++        />
++
++    <TextView
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:textStyle="bold"
++        android:layout_marginTop="100sp"
++        android:text="Your Order is:"
++        android:textSize="15sp"
++        app:layout_constraintRight_toRightOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintLeft_toLeftOf="parent"
++        />
++
++    <TextView
++        android:id="@+id/pizza"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:textStyle="bold"
++        android:layout_marginTop="120sp"
++        android:text="<Pizza>"
++        android:textSize="15sp"
++        app:layout_constraintRight_toRightOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintLeft_toLeftOf="parent"
++        />
++
++    <TextView
++        android:id="@+id/pizzaPrice"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:textStyle="bold"
++        android:layout_marginTop="120sp"
++        android:text="<Pizza price>"
++        android:textSize="15sp"
++        android:layout_marginLeft="100sp"
++        app:layout_constraintRight_toRightOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintLeft_toLeftOf="parent"
++        />
++
++    <TextView
++        android:id="@+id/toppings"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:textStyle="bold"
++        android:layout_marginTop="150sp"
++        android:text="<Toppings>"
++        android:textSize="15sp"
++        app:layout_constraintRight_toRightOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintLeft_toLeftOf="parent"
++        />
++
++    <TextView
++        android:id="@+id/toppingsPrice"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:textStyle="bold"
++        android:layout_marginTop="150sp"
++        android:text="<Toppings Price>"
++        android:layout_marginLeft="100sp"
++        android:textSize="15sp"
++        app:layout_constraintRight_toRightOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintLeft_toLeftOf="parent"
++        />
++
++    <TextView
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:textStyle="bold"
++        android:layout_marginTop="200sp"
++        android:text="Total Price:"
++        android:textSize="15sp"
++        app:layout_constraintRight_toRightOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintLeft_toLeftOf="parent"
++        />
++
++    <TextView
++        android:id="@+id/totalPrice"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:textStyle="bold"
++        android:layout_marginTop="200sp"
++        android:text="<Total Price>"
++        android:layout_marginLeft="100sp"
++        android:textSize="15sp"
++        app:layout_constraintRight_toRightOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintLeft_toLeftOf="parent"
++        />
++
++    <Button
++        android:id="@+id/btnMakePurchase"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:text="MAKE ANOTHER PURCHASE"
++        android:textSize="20sp"
++        android:layout_marginTop="230sp"
++        android:textStyle="bold"
++        app:layout_constraintLeft_toLeftOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintRight_toRightOf="parent"
++        />
++
++
++
++
++
++
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/slicemeuppizza/Reciept.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/slicemeuppizza/Reciept.java b/app/src/main/java/com/example/slicemeuppizza/Reciept.java
+new file mode 100644
+--- /dev/null	(date 1746525431845)
++++ b/app/src/main/java/com/example/slicemeuppizza/Reciept.java	(date 1746525431845)
+@@ -0,0 +1,25 @@
++package com.example.slicemeuppizza;
++
++import android.os.Bundle;
++import android.widget.Button;
++
++import androidx.activity.EdgeToEdge;
++import androidx.appcompat.app.AppCompatActivity;
++import androidx.core.graphics.Insets;
++import androidx.core.view.ViewCompat;
++import androidx.core.view.WindowInsetsCompat;
++
++public class Reciept extends AppCompatActivity {
++    Button back;
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        EdgeToEdge.enable(this);
++        setContentView(R.layout.activity_reciept);
++        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
++            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
++            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
++            return insets;
++        });
++    }
++}
+\ No newline at end of file
