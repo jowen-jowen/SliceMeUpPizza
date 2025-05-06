@@ -136,14 +136,19 @@ public class MainActivity extends AppCompatActivity {
             String selectedToppings = toppingsBuilder.toString();
 
             double totalPrice = crustType + toppingsPrice;
+            String sendPizzaPrice = String.format(String.valueOf(pizzaPrice));
+            String sendTotalPrice = String.format(String.valueOf(totalPrice));
+            String sendToppingsPrice = String.format(String.valueOf(toppingsPrice));
 
             Toast.makeText(MainActivity.this, "Total Price of the Pizza is: PHP " + totalPrice, Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(MainActivity.this, Reciept.class);
             intent.putExtra("selectedPizza", selectedPizza);
+            intent.putExtra("sendPizzaPrice", sendPizzaPrice);
             intent.putExtra("selectedCrust", selectedCrust);
             intent.putExtra("selectedToppings", selectedToppings);
-            intent.putExtra("totalPrice", totalPrice);
+            intent.putExtra("totalToppingsPrice", sendToppingsPrice);
+            intent.putExtra("totalPrice", sendTotalPrice);
             startActivity(intent);
 
         });
